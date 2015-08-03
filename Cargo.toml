@@ -5,3 +5,12 @@ authors = ["Paul Woolcock <paul@woolcock.us>"]
 
 [dependencies]
 nom = "*"
+mio = "*"
+
+[lib]
+name = 'dhcp'
+path = 'src/lib.rs'
+
+[[bin]]
+name = 'serve'
+path = 'src/bin/serve.rs'

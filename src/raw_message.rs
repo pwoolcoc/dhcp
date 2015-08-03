@@ -1,11 +1,8 @@
-
-#![feature(ip_addr)]
-
-#[macro_use] extern crate nom;
 use std::str;
 use std::convert::{From};
 use std::net::{IpAddr, Ipv4Addr};
 use nom::{IResult, be_u8, be_u16, be_u32};
+use std::borrow::{ToOwned};
 
 fn take_rest(input: &[u8]) -> IResult<&[u8], &[u8]> {
     IResult::Done(b"", input)
@@ -125,8 +122,23 @@ fn test_parse_message() {
         113, 114, 115, 116, 117, 118, 119, 120,
         121, 122, 123, 124, 125, 126, 0, 0, // file
     ];
-    let parsed = parse_message(&test_message);
-    println!("{:?}", parsed);
+    if let IResult::Done(_, parsed) = parse_message(&test_message) {
+        let chaddr = vec![29u8, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
+        let sname: String = "-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abc".into();
+        let file: String = "mnopqrstuvwxyz{|}~mnopqrstuvwxyz{|}~mnopqrstuvwxyz{|}~mnopqrstuvwxyz{|}~mnopqrstuvwxyz{|}~mnopqrstuvwxyz{|}~mnopqrstuvwxyz{|}~".into();
+        assert_eq!(parsed, Message {
+           op: 1, htype: 2, hlen: 3, hops: 4,
+           xid: 84281096, secs: 2314, flags: 2828,
+           ciaddr: IpAddr::V4(Ipv4Addr::new(13, 14, 15, 16)),
+           yiaddr: IpAddr::V4(Ipv4Addr::new(17, 18, 19, 20)),
+           siaddr: IpAddr::V4(Ipv4Addr::new(21, 22, 23, 24)),
+           giaddr: IpAddr::V4(Ipv4Addr::new(25, 26, 27, 28)),
+           chaddr: &chaddr, sname: &sname, file: &file,
+           options: None
+       });
+    } else {
+        assert!(false);
+    }
 }
 
 #[test]

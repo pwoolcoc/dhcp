@@ -3,12 +3,6 @@ name = "dhcp"
 version = "0.1.0"
 authors = ["Paul Woolcock <paul@woolcock.us>"]
 
-[dependencies]
-nom = "*"
+[dependencies.dhcp_parser]
+path = "../dhcp_parser"
 
-[dependencies.enum_primitive]
-git = "https://github.com/pwoolcoc/enum_primitive-rs"
-
-[dependencies.num]
-version = "*"
-default-features = false

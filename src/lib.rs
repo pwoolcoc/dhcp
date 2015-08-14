@@ -1,5 +1,7 @@
 #![feature(ip_addr)]
 #[macro_use] extern crate nom;
+#[macro_use] extern crate enum_primitive;
+extern crate num;
 
 /// DHCP Protocol, RFC-2131
 /// 

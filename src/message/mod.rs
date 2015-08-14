@@ -1,5 +1,6 @@
 mod op;
 mod htype;
+mod options;
 
 use std::str;
 use std::fmt;

@@ -5,3 +5,10 @@ authors = ["Paul Woolcock <paul@woolcock.us>"]
 
 [dependencies]
 nom = "*"
+
+[dependencies.enum_primitive]
+git = "https://github.com/pwoolcoc/enum_primitive-rs"
+
+[dependencies.num]
+version = "*"
+default-features = false
